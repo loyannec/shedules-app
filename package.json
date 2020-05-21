@@ -1,0 +1,23 @@
+{
+  "name": "pkg-schedules",
+  "version": "1.0.0",
+  "description": "The company first asks you to create a small prototype, which it will present to its teams to assess whether such a website could be useful to them.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loyannec/shedules-app.git"
+  },
+  "keywords": [
+    "node",
+    "shedules"
+  ],
+  "author": "Loyanne Cristine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loyannec/shedules-app/issues"
+  },
+  "homepage": "https://github.com/loyannec/shedules-app#readme"
+}
