@@ -2,10 +2,10 @@
   "name": "pkg-schedules",
   "version": "1.0.0",
   "description": "The company first asks you to create a small prototype, which it will present to its teams to assess whether such a website could be useful to them. For this project, you will have to store data and display it in a browser. To do this, you will discover databases with MySQL and make a small web application. The prototype will be very simple and will have only two pages: a page to create a schedule, and a page to display all existing schedules.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node app.js",
     "mysql": "node database.js"
   },
   "repository": {
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/loyannec/shedules-app#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
     "mysql": "^2.18.1"
   }
 }
