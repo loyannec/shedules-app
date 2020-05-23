@@ -1,3 +1,11 @@
+{{#if (isDefined error)}}
+    {{#if error}}
+    <p>Fatality</p>
+    {{else}}
+    <p>Success register!</p>
+    {{/if}}
+{{/if}}
+
 <form action="/new" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">
