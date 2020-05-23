@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "mysql": "node database.js"
+    "build-db": "node buildDatabase.js"
   },
   "repository": {
     "type": "git",
