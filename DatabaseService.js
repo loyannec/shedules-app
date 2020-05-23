@@ -28,15 +28,6 @@ class DatabaseService {
         }
     }
 
-    query(statement, callback) {
-        this.#connection.query(statement, function (error, results) {
-            if (error) throw error;
-            if (typeof callback === 'function') {
-                callback(results);
-            }
-        });
-    }
-
     setUp() {
         const databaseName = DatabaseService.databaseName;
         const tableName = DatabaseService.tableName;
@@ -48,23 +39,24 @@ class DatabaseService {
 
         this.query(`CREATE TABLE ${tableName} (`+
             "id INT PRIMARY KEY NOT NULL AUTO_INCREMENT," +
-            "username VARCHAR (50) UNIQUE NOT NULL," +
+            "username VARCHAR (50) NOT NULL," +
             "day_of_the_week INTEGER NOT NULL," +
             "start_time TIME NOT NULL," +
-            "end_time TIME NOT NULL" +
+            "end_time TIME NOT NULL," +
+            "UNIQUE KEY unique_schedule(username, day_of_the_week, start_time, end_time)" +
         ")");
     }
 
-    insertSchedule(schedule) {
+    insertSchedule(schedule, callback) {
         const databaseName = DatabaseService.databaseName;
         const tableName = DatabaseService.tableName;
-        this.query(`INSERT INTO ${databaseName}.${tableName} (username, day_of_the_week, start_time, end_time) VALUES ('${schedule.username}', ${schedule.day_of_the_week}, '${schedule.start_time}', '${schedule.end_time}')`);
+        this.#connection.query(`INSERT INTO ${databaseName}.${tableName} SET ?`, schedule, callback);
     }
 
     retrieveSchedules(callback) {
         const databaseName = DatabaseService.databaseName;
         const tableName = DatabaseService.tableName;
-        this.query(`SELECT * FROM ${databaseName}.${tableName}`, callback);
+        this.#connection.query(`SELECT * FROM ${databaseName}.${tableName}`, callback);
     }
 }
 module.exports = DatabaseService;
