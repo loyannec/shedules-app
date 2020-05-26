@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
+    "watch": "nodemon --ext js,handlebars --ignore public",
     "build-db": "node buildDatabase.js"
   },
   "repository": {
@@ -23,8 +24,11 @@
   },
   "homepage": "https://github.com/loyannec/shedules-app#readme",
   "dependencies": {
+    "connect-livereload": "^0.6.1",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
-    "mysql": "^2.18.1"
+    "livereload": "^0.9.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4"
   }
 }
