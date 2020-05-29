@@ -45,7 +45,6 @@ app.set('view engine', 'handlebars');
 app.use(express.urlencoded());
 app.use(express.static(publicDirectory));
 
-
 app.get('/', (req, res) => {
     var database = new DatabaseService();
     database.connect();
