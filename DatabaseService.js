@@ -31,13 +31,13 @@ class DatabaseService {
     setUp() {
         const databaseName = DatabaseService.databaseName;
         const tableName = DatabaseService.tableName;
-        this.query(`DROP DATABASE if exists ${databaseName}`);
+        this.#connection.query(`DROP DATABASE if exists ${databaseName}`);
 
-        this.query(`CREATE DATABASE ${databaseName}`);
+        this.#connection.query(`CREATE DATABASE ${databaseName}`);
 
-        this.query(`USE ${databaseName}`);
+        this.#connection.query(`USE ${databaseName}`);
 
-        this.query(`CREATE TABLE ${tableName} (`+
+        this.#connection.query(`CREATE TABLE ${tableName} (`+
             "id INT PRIMARY KEY NOT NULL AUTO_INCREMENT," +
             "username VARCHAR (50) NOT NULL," +
             "day_of_the_week INTEGER NOT NULL," +
