@@ -20,9 +20,21 @@ const port = 3000;
 
 app.use(connectLivereload());
 
+const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thrusday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+];
+
 const handlebars = exphbs.create({                        // Module that permits to render a template.
     helpers: {
-        isDefined: (value) => value !== undefined         // Adding helper to verify if value is defined.
+        isDefined: (value) => value !== undefined,        // Adding helper to verify if value is defined.
+        day: (dayWeek) => days[dayWeek - 1],
+        nextDayWeek: (dayWeek) => dayWeek + 1
     }
 });
 
@@ -39,10 +51,10 @@ app.get('/', (req, res) => {
     database.connect();
     database.retrieveSchedules((error, schedules) => {
         database.disconnect();
-        res.render('home', { schedules: schedules });
+        res.render('home', { schedules, days });
     });
 });
-app.get('/new', (req, res) => res.render('form'));
+app.get('/new', (req, res) => res.render('form', { days: days }));
 
 // Forward to error handler
 app.post('/new', (req, res) => {
@@ -51,7 +63,8 @@ app.post('/new', (req, res) => {
     database.insertSchedule(req.body, (error) => {
         database.disconnect();
         res.render('form', {
-            error: error ? error.code : null
+            error: error ? error.code : null,
+            days
         });
     });
 });
