@@ -20,7 +20,7 @@ const port = 3000;
 
 app.use(connectLivereload());
 
-const days = [
+const days = [                                            // Defined list of the days.
     'Monday',
     'Tuesday',
     'Wednesday',
@@ -30,6 +30,9 @@ const days = [
     'Sunday'
 ];
 
+/*
+Global functions that are used by templates.
+*/
 const handlebars = exphbs.create({                        // Module that permits to render a template.
     helpers: {
         isDefined: (value) => value !== undefined,        // Adding helper to verify if value is defined.
@@ -38,13 +41,18 @@ const handlebars = exphbs.create({                        // Module that permits
     }
 });
 
-// View engine setup
+/*
+View engine setup
+*/
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded());                             // Define how form data should be encode.
 app.use(express.static(publicDirectory));
 
+/*
+Routes
+*/
 app.get('/', (req, res) => {
     var database = new DatabaseService();
     database.connect();
@@ -55,7 +63,9 @@ app.get('/', (req, res) => {
 });
 app.get('/new', (req, res) => res.render('form', { days: days }));
 
-// Forward to error handler
+/*
+Forward to error handler
+*/
 app.post('/new', (req, res) => {
     var database = new DatabaseService();
     database.connect();
@@ -68,7 +78,9 @@ app.post('/new', (req, res) => {
     });
 });
 
-// Testing if start server
+/*
+Testing if start server
+*/
 console.log("Starting server");
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
