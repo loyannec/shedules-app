@@ -50,13 +50,16 @@ class DatabaseService {
     insertSchedule(schedule, callback) {
         const databaseName = DatabaseService.databaseName;
         const tableName = DatabaseService.tableName;
-        this.#connection.query(`INSERT INTO ${databaseName}.${tableName} SET ?`, schedule, callback);
+        // this.#connection.query(`INSERT INTO ${databaseName}.${tableName} SET ?`, schedule, callback);
+        this.#connection.query(`INSERT INTO ${databaseName}.${tableName} (username, day_of_the_week, start_time, end_time) VALUES (?, ?, ?, ?)`, [
+            schedule.username, schedule.day_of_the_week, schedule.start_time, schedule.end_time
+        ], callback);
     }
 
     retrieveSchedules(callback) {
         const databaseName = DatabaseService.databaseName;
         const tableName = DatabaseService.tableName;
-        this.#connection.query(`SELECT * FROM ${databaseName}.${tableName}`, callback);
+        this.#connection.query(`SELECT * FROM ${databaseName}.${tableName} ORDER BY id`, callback);
     }
 }
 module.exports = DatabaseService;
